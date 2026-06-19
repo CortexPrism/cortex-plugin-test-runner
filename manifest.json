@@ -1,0 +1,195 @@
+{
+  "name": "cortex-plugin-test-runner",
+  "version": "1.0.0",
+  "description": "Playwright + Cypress Unified Test Runner — unified test execution across Playwright (Chromium, Firefox, WebKit) and Cypress (component + E2E). Generate tests from user flows, ML auto-heal broken selectors, and debug with trace viewers.",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-test-runner",
+  "homepage": "https://cortexprism.io/marketplace/plugins/test-runner",
+  "capabilities": ["tools", "shell:run", "network:fetch"],
+  "tools": [
+    {
+      "name": "test_generate",
+      "description": "Generate test scripts from user flows: provide a natural language description and get Playwright or Cypress test code",
+      "params": [
+        {
+          "name": "flow_description",
+          "type": "string",
+          "description": "Natural language description of the user flow to test",
+          "required": true
+        },
+        {
+          "name": "framework",
+          "type": "string",
+          "description": "Test framework",
+          "required": false,
+          "enum": ["playwright", "cypress", "both"]
+        },
+        {
+          "name": "include_assertions",
+          "type": "boolean",
+          "description": "Include assertion checks",
+          "required": false
+        },
+        {
+          "name": "output_file",
+          "type": "string",
+          "description": "File path to write generated test",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "test_run",
+      "description": "Run tests using Playwright or Cypress and return results with trace viewer links",
+      "params": [
+        {
+          "name": "framework",
+          "type": "string",
+          "description": "Test framework to use",
+          "required": true,
+          "enum": ["playwright", "cypress"]
+        },
+        {
+          "name": "test_path",
+          "type": "string",
+          "description": "Path to test file or directory",
+          "required": true
+        },
+        {
+          "name": "browser",
+          "type": "string",
+          "description": "Browser to run tests in",
+          "required": false,
+          "enum": ["chromium", "firefox", "webkit", "all"]
+        },
+        {
+          "name": "headed",
+          "type": "boolean",
+          "description": "Run in headed mode",
+          "required": false
+        },
+        {
+          "name": "timeout_seconds",
+          "type": "number",
+          "description": "Test timeout (default: 60)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "test_heal_selectors",
+      "description": "Analyze failing tests and use ML to suggest fixed selectors. Auto-heals broken locators.",
+      "params": [
+        {
+          "name": "test_path",
+          "type": "string",
+          "description": "Path to failing test file",
+          "required": true
+        },
+        {
+          "name": "framework",
+          "type": "string",
+          "description": "Test framework",
+          "required": true,
+          "enum": ["playwright", "cypress"]
+        },
+        {
+          "name": "auto_apply",
+          "type": "boolean",
+          "description": "Auto-apply suggested fixes",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "test_trace_viewer",
+      "description": "Open or share a Playwright trace viewer for debugging test failures",
+      "params": [
+        {
+          "name": "trace_file",
+          "type": "string",
+          "description": "Path to trace file or test run ID",
+          "required": true
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "description": "Action",
+          "required": false,
+          "enum": ["open", "share", "export"]
+        }
+      ]
+    },
+    {
+      "name": "test_visual_diff",
+      "description": "Run visual regression tests comparing screenshots against baselines using pixel-level + perceptual diffing",
+      "params": [
+        {
+          "name": "test_path",
+          "type": "string",
+          "description": "Path to visual test file or directory",
+          "required": true
+        },
+        {
+          "name": "update_baselines",
+          "type": "boolean",
+          "description": "Update baseline screenshots",
+          "required": false
+        },
+        {
+          "name": "threshold",
+          "type": "number",
+          "description": "Pixel difference threshold (default: 0.01)",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": { "cortex": ">=1.0.0" },
+  "ui": {
+    "settings": [
+      {
+        "section": "Test Configuration",
+        "fields": [
+          {
+            "key": "defaultFramework",
+            "label": "Default Framework",
+            "type": "select",
+            "defaultValue": "playwright",
+            "enum": [
+              { "label": "Playwright", "value": "playwright" },
+              { "label": "Cypress", "value": "cypress" }
+            ]
+          },
+          {
+            "key": "defaultBrowser",
+            "label": "Default Browser",
+            "type": "select",
+            "defaultValue": "chromium",
+            "enum": [
+              { "label": "Chromium", "value": "chromium" },
+              { "label": "Firefox", "value": "firefox" },
+              { "label": "WebKit", "value": "webkit" }
+            ]
+          },
+          { "key": "retryCount", "label": "Retry Count", "type": "number", "defaultValue": 2 },
+          {
+            "key": "parallelWorkers",
+            "label": "Parallel Workers",
+            "type": "number",
+            "defaultValue": 4
+          }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "humanReview": true
+  }
+}
