@@ -27,7 +27,6 @@ for (const t of tools) {
   });
 }
 
-
 Deno.test('tools array — has 5 tools', () => {
   assertEquals(tools.length, 5);
 });
