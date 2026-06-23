@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-test-runner",
-  "version": "1.0.0",
-  "description": "Playwright + Cypress Unified Test Runner — unified test execution across Playwright (Chromium, Firefox, WebKit) and Cypress (component + E2E). Generate tests from user flows, ML auto-heal broken selectors, and debug with trace viewers.",
+  "version": "1.0.1",
+  "description": "Playwright + Cypress Unified Test Runner \u2014 unified test execution across Playwright (Chromium, Firefox, WebKit) and Cypress (component + E2E). Generate tests from user flows, ML auto-heal broken selectors, and debug with trace viewers.",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -9,7 +9,11 @@
   "license": "MIT",
   "repository": "https://github.com/CortexPrism/cortex-plugin-test-runner",
   "homepage": "https://cortexprism.io/marketplace/plugins/test-runner",
-  "capabilities": ["tools", "shell:run", "network:fetch"],
+  "capabilities": [
+    "tools",
+    "shell:run",
+    "network:fetch"
+  ],
   "tools": [
     {
       "name": "test_generate",
@@ -26,7 +30,11 @@
           "type": "string",
           "description": "Test framework",
           "required": false,
-          "enum": ["playwright", "cypress", "both"]
+          "enum": [
+            "playwright",
+            "cypress",
+            "both"
+          ]
         },
         {
           "name": "include_assertions",
@@ -51,7 +59,10 @@
           "type": "string",
           "description": "Test framework to use",
           "required": true,
-          "enum": ["playwright", "cypress"]
+          "enum": [
+            "playwright",
+            "cypress"
+          ]
         },
         {
           "name": "test_path",
@@ -64,7 +75,12 @@
           "type": "string",
           "description": "Browser to run tests in",
           "required": false,
-          "enum": ["chromium", "firefox", "webkit", "all"]
+          "enum": [
+            "chromium",
+            "firefox",
+            "webkit",
+            "all"
+          ]
         },
         {
           "name": "headed",
@@ -95,7 +111,10 @@
           "type": "string",
           "description": "Test framework",
           "required": true,
-          "enum": ["playwright", "cypress"]
+          "enum": [
+            "playwright",
+            "cypress"
+          ]
         },
         {
           "name": "auto_apply",
@@ -120,7 +139,11 @@
           "type": "string",
           "description": "Action",
           "required": false,
-          "enum": ["open", "share", "export"]
+          "enum": [
+            "open",
+            "share",
+            "export"
+          ]
         }
       ]
     },
@@ -150,7 +173,9 @@
     }
   ],
   "dependencies": {},
-  "peerDependencies": { "cortex": ">=1.0.0" },
+  "peerDependencies": {
+    "cortex": ">=0.51.0"
+  },
   "ui": {
     "settings": [
       {
@@ -161,9 +186,15 @@
             "label": "Default Framework",
             "type": "select",
             "defaultValue": "playwright",
-            "enum": [
-              { "label": "Playwright", "value": "playwright" },
-              { "label": "Cypress", "value": "cypress" }
+            "options": [
+              {
+                "label": "Playwright",
+                "value": "playwright"
+              },
+              {
+                "label": "Cypress",
+                "value": "cypress"
+              }
             ]
           },
           {
@@ -171,13 +202,27 @@
             "label": "Default Browser",
             "type": "select",
             "defaultValue": "chromium",
-            "enum": [
-              { "label": "Chromium", "value": "chromium" },
-              { "label": "Firefox", "value": "firefox" },
-              { "label": "WebKit", "value": "webkit" }
+            "options": [
+              {
+                "label": "Chromium",
+                "value": "chromium"
+              },
+              {
+                "label": "Firefox",
+                "value": "firefox"
+              },
+              {
+                "label": "WebKit",
+                "value": "webkit"
+              }
             ]
           },
-          { "key": "retryCount", "label": "Retry Count", "type": "number", "defaultValue": 2 },
+          {
+            "key": "retryCount",
+            "label": "Retry Count",
+            "type": "number",
+            "defaultValue": 2
+          },
           {
             "key": "parallelWorkers",
             "label": "Parallel Workers",
@@ -189,7 +234,9 @@
     ]
   },
   "aiDisclosure": {
-    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "tools": [
+      "Kilo (DeepSeek) \u2014 scaffold and implementation"
+    ],
     "humanReview": true
   }
 }
